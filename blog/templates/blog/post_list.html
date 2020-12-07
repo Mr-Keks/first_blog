@@ -1,21 +1,15 @@
-<html>
-	<head>
-		<title>Blog</title>
-	</head>
-	<body>
-		<p>Hi there!</p>
-		{%for post in posts %}
-			<div>
-				<h1>{{post.title}}</h2>
-				<p>{{post.text|linebreaksbr}}</p>
-				<p>author: {{post.author}}</p>
-				<p>published date: {{post.published_date}}</p>
-				<hr>
+{% extends 'blog/base.html' %}
 
+{% block content %}
+	{%for post in posts %}
+		<div class="post">
+			<div class="date">
+				<p>published date: {{post.published_date}}</p>				
+				<p>author: {{post.author}}</p>
 			</div>
-		{%endfor%}
-		
-		
-		<p>It works!</p>	
-	</body>
-</html>
+			<h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+			<p>{{post.text|linebreaksbr}}</p>
+			<hr>
+		</div>			
+	{% endfor %}
+{% endblock %}
